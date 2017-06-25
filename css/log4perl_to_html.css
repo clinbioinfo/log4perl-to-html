@@ -1,0 +1,37 @@
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: Arial;
+}
+
+#header {
+    text-align: justify;
+}
+
+#footer {
+    font-size: 12px;
+    font-style: italic;
+    padding-top: 10px;
+    text-align: right;
+    color: gray;
+}
+
+#main, #header, #footer, #console, .section_div {
+
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 10px 10px 10px 10px;
+    position: relative;
+    border: 1px solid blue;
+}
+
+.details {
+
+    font-size: xx-small;
+}
+
+.time_changed {
+    background-color : orange;
+}

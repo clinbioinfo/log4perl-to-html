@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <meta charset="utf8"/>
+    <title>Log4Perl log file browser -  [% infile_basename %]</title>
+    <link rel="stylesheet" href="/log4perl-to-html/css/log4perl_to_html.css" />
+    <link rel="stylesheet" href="/log4perl-to-html/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css" />    
+  </head>
+  <body>
+    <div id="header">
+      <h3>Log4Perl log file browser - [% infile_basename %]</h3>      
+      <br>
+    </div>
+    <br>
+    <div id="main">
+      start date: [% start_date %] [% start_time %] | [% IF overall_time_change %]<span class="time_changed">[% ELSE %]<span>[% END %] end date: [% end_date %] [% end_time %]</span>| <span><a href="[% infile_url %]">Source log file</a></span> | <span class="debug_count">DEBUG: [% debug_count %]</span> |  <span class="alert-info">INFO: [% info_count %]</span> |  <span class="alert-warning">WARN: [% warn_count %]</span> |  <span class="alert-danger">ERROR: [% error_count %]</span> |  <span class="alert-danger">FATAL: [% fatal_count %]</span>
+        <br>
+        Comment: [% comment %]
+      <br>
+      <br>
+      <table id="log_table" class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>State</th>
+            <!-- <th>Date</th> -->
+            <!-- <th>Time</th> -->
+            <th>Statement</th>
+            <!-- <th>Line #</th> -->
+            <!-- <th>Program File</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          [% FOREACH record IN records %]
+            [% IF record.6 %]
+            <td class="time_changed"  title="[% record.2 %]">[% loop.count %]</td>
+              [% ELSE %]
+            <td title="[% record.2 %]">[% loop.count %]</td>
+            [% END %]
+            [% IF record.0 == 'INFO' %]
+            <td class="alert-info">
+              [% ELSIF record.0 == 'WARN' %]
+            <td class="alert-warning">
+              [% ELSIF record.0 == 'ERROR' %]
+            <td class="alert-danger">
+              [% ELSIF record.0 == 'FATAL' %]
+            <td class="alert-danger">
+              [% ELSE %]
+            <td>
+              [% END %]
+              [% record.0 %]</td>
+            <!-- <td>[% record.1 %]</td> -->
+            <!-- <td>[% record.2 %]</td> -->
+            <td>[% record.5 %]<br><span class="details">at line [% record.4 %] in [% record.3 %]</span></td>
+            <!-- <td>[% record.4 %]</td> -->
+            <!-- <td>[% record.3 %]</td> -->
+          </tr>
+          [% END %]
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <div id="footer">
+      This page was created on '[% date_created %]' | Method created: '[% method_created %]' | Contact <a href="mailto:[% admin_email_address %]?subject=[% title %]">[% admin_email_address %]</a><br>
+    </div>
+    <script src="/log4perl-to-html/javascript/lib/jquery-1.10.2.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js" ></script>
+    <script src="/log4perl-to-html/javascript/log4perl_to_html.js"></script>
+  </body>
+</html>
